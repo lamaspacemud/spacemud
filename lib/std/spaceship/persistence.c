@@ -63,7 +63,7 @@ void set_restored(int r)
 
 string save_to()
 {
-   return SHIP_PATH(query_owner()) + ".o";
+   return query_owner() ? SHIP_PATH(query_owner()) + ".o" : 0;
 }
 
 int query_state()
@@ -83,11 +83,14 @@ void set_owner(string o)
 
 void unguarded_save()
 {
-   before_save();
-   // We use save_things_to_string() to avoid saving players and their inventories.
-   unguarded(1, ( : write_file, save_to(), save_things_to_string(), 1 :));
-   state = SHIP_PERSISTED;
-   TBUG("State: PERSISTED");
+   if (save_to() && query_owner())
+   {
+      before_save();
+      // We use save_things_to_string() to avoid saving players and their inventories.
+      unguarded(1, ( : write_file, save_to(), save_things_to_string(), 1 :));
+      state = SHIP_PERSISTED;
+      TBUG("State: PERSISTED");
+   }
 }
 
 int restore_ship(string save_str)

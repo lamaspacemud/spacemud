@@ -58,6 +58,7 @@ class docking_info
    string vfile;
    int docking_time;
    string who;
+   string dock_name;
 }
 
 class spacestation_config

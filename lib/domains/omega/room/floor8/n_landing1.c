@@ -12,7 +12,7 @@ void setup()
        "and docking bays NE1-6 east of here.");
    add_item("floor", "The floor, a smooth, low-gravity surface, allows for effortless movement. ");
    add_item("sign", "signs", "Nice signs, they point to different places. They're clever like that.");
-   set_exits((["east":"n_landing", "west":"n_landing2", "south":"n_hall"]));
+   set_exits((["east":"n_landing", "west":"n_landing2", "south":"n_hall","north":"n_coffice"]));
    set_listen("You hear people running through the terminal. " +
               "It sounds like a busy terminal with people coming and going");
 }

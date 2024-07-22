@@ -6,7 +6,7 @@ inherit SPACE_CLASSES;
 void setup()
 {
    set_flag(ATTACHED);
-   set_long("The lighted airlock door leads into or out of the ship. It can only be used when docked.");
+   set_long("The lighted airlock door leads into or out of the ship. It can only be entered when docked.");
    add_adj("lighted");
    set_id("airlock", "ship_furniture");
    set_look_in_desc("The airlock seems empty.");
@@ -35,6 +35,11 @@ mixed direct_enter_obj()
          return "#The airlock is locked since the ship is not currently docked.";
    }
    return 1;
+}
+
+mixed direct_use_obj()
+{
+   return "#It's not of much use, but it can be entered when docked.";
 }
 
 int do_not_restore()

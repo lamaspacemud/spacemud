@@ -45,6 +45,14 @@ string ship_name(string type)
           random(100000);
 }
 
+string random_large_ship()
+{
+   string *ship_types =
+       ({"Starcruiser", "Galactic Carrier", "Void Frigate", "Nebula Dreadnought", "Solar Destroyer",
+         "Celestial Battleship", "Interstellar Transporter", "Cosmic Liner", "Deep Space Freighter", "Astrohauler"});
+   return choice(ship_types);
+}
+
 // This function begins a new lease. The file must the base_name of the file of
 // the ship.
 varargs int set_owner(object owner, string file, string sname, string ss, string loc, string da, int lt)

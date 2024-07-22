@@ -164,11 +164,99 @@ object virtual_create(string ship_file, string arg)
 {
    object ship;
    string owner;
-   if (sscanf(arg, "%s/%d", owner, unique_id) != 2)
-      return 0;
+   int x, y;
+
+   TBUG(arg);
+
+   if (sscanf(arg, "%s/%d/%d/%d", owner, unique_id, x, y) != 4)
+      if (sscanf(arg, "%s/%d", owner, unique_id) != 2)
+         return 0;
+   TBUG("Ship: " + ship + " Owner: " + owner + " UID: " + unique_id + " x: " + x + " y: " + y);
    set_owner(owner);
    ship = new (ship_file);
    ship_i = 0;
+   return ship;
+}
+
+string *generate_ship(int width)
+{
+   string *ship = ({});
+   int length = random(width) + width;
+   width = width / 2 || 1;
+   for (int l = 0; l < length; l++)
+   {
+      string line = "";
+      for (int w = 0; w < width; w++)
+      {
+         int chance = (100 - ((w) * (100 / width)));
+         if (random(100) < chance)
+            line += "#";
+         else
+            line += " ";
+      }
+      ship += ({line});
+   }
+
+   for (int l = 0; l < length; l++)
+   {
+      string line = ship[l];
+
+      for (int c = 0; c < width; c++)
+      {
+         ship[l] = line[c..c] + ship[l];
+      }
+      ship[l] = " " + ship[l] + " ";
+   }
+
+   ship = ({repeat_string(" ", strlen(ship[0]))}) + ship + ({repeat_string(" ", strlen(ship[0]))});
+
+   for (int l = 0; l < length + 2; l++)
+   {
+      string line = ship[l];
+
+      for (int c = 0; c < strlen(ship[0]); c++)
+      {
+         if (line[c] == '#')
+         {
+            if (line[c - 1] == ' ' && line[c + 1] == ' ' && ship[l - 1][c] == ' ')
+               line[c] = ' ';
+         }
+      }
+      ship[l] = replace_string(line, " # ", " H ");
+      ship[l] = replace_string(ship[l], " ## ", " HH ");
+      ship[l] = replace_string(ship[l], " ## ", " HH ");
+   }
+   for (int i = 0; i < length / 3; i++)
+   {
+      if (i != 1 && i > (length / 3) && strsrch(ship[i], "H") != -1)
+         i = length;
+      else
+      {
+         ship[i] = replace_string(ship[i], "#", "B");
+         ship[i] = replace_string(ship[i], "H", "B");
+      }
+   }
+   for (int i = length / 3; i < length - (length / 3); i++)
+   {
+      if (i > (length / 3) && strsrch(ship[i], "H") != -1)
+         i = length;
+      else
+      {
+         ship[i] = replace_string(ship[i], "#", "T");
+      }
+   }
+
+   for (int i = length; i > (length - (length / 3)); i--)
+   {
+      if (i > (length / 3) && strsrch(ship[i], "H") != -1)
+         i = 0;
+      else
+      {
+         ship[i] = replace_string(ship[i], "#", "C");
+         ship[i] = replace_string(ship[i], "H", "C");
+      }
+   }
+
    return ship;
 }
 

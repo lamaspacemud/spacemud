@@ -65,6 +65,8 @@ int claim_dock(string room_file, string docked_ship, int docking_time, string wh
    di->vfile = docked_ship;
    di->docking_time = docking_time;
    di->who = lower_case(who);
+   di->dock_name = load_object(room_file)->short();
+   
    if (!docked_ships[room_file])
    {
       docked_ships[room_file] = di;

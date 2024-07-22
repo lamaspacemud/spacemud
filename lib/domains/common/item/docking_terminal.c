@@ -205,6 +205,8 @@ void do_use()
 
 mixed indirect_put_obj_wrd_obj(object ob1, string wrd, object ob2)
 {
+   if (ob1->is_docking_pass())
+      return 1;
    return "#That doesn't seem to fit into the terminal.";
 }
 
