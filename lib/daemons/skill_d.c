@@ -32,7 +32,7 @@ inherit CLASS_SKILL;
 private
 mapping skills = ([]);
 private
-nosave mixed skill_ranks = ({100,  250,  500,  750,  1000, 1250, 1500, 2000, 2500, 3000,
+nosave mixed skill_ranks = ({100,  250,  500,  750,  1000, 1250, 1500, 1750, 2000, 2500, 3000,
                              3500, 4000, 4500, 5000, 5500, 6000, 6500, 7000, 8000, 10000});
 #ifdef USE_ROMAN_NUMERALS
 private
@@ -291,7 +291,7 @@ void init_skills()
    write(SKILL_FLAT_FILE + " loaded.");
 }
 
-//:FUNCTION init_skills
+//:FUNCTION dump_skills_to_file
 // Dump all skills to /data/config/skill-tree.
 void dump_skills_to_file()
 {
