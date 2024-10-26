@@ -19,7 +19,7 @@
 
 inherit CMD;
 inherit M_FRAME;
-inherit "/std/classes/mission_info";
+inherit CLASS_MISSION_INFO;
 
 nomask private void main()
 {

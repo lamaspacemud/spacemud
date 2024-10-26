@@ -11,7 +11,7 @@
 // of variants that are available.
 
 inherit M_DAEMON_DATA;
-inherit "/std/classes/mission_info";
+inherit CLASS_MISSION_INFO;
 
 private
 mapping missions = ([]);
